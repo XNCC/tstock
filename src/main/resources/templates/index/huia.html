@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>首页 - ENE股票分析</title>
+    <link rel="icon" href="static/index/favicon.ico" type="image/ico">
+    <meta name="keywords" content="ENE股票打下轨股票代码收集分析">
+    <meta name="description" content="ENE股票打下轨股票代码收集分析">
+    <meta name="author" content="yinqi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link href="static/index/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="static/index/css/style.min.css" rel="stylesheet">
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+                <a href="/"><img src="static/index/images/ene.jpeg" title="LightYear" alt="LightYear"/>
+                </a>
+            </div>
+            <div class="lyear-layout-sidebar-scroll">
+
+                <nav class="sidebar-main">
+                    <ul class="nav nav-drawer">
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="javascript:void(0)"><i class="mdi mdi-menu"></i> 沪A连涨 - <span
+                                    th:text="${#dates.format(time,'yyyy-MM-dd')}"></span></a>
+                            <ul class="nav nav-subnav">
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)">1天前打下轨后连涨1天</a>
+                                    <b class="arrow"></b>
+                                    <ul class="nav nav-subnav" th:each="item: ${data3}">
+                                        <li class="nav-item nav-item-has-subnav">
+                                            <a>
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                <span class="code"><span class="c" th:text="${item.code}"></span> &amp;
+                                                <span class="n" th:text="${item.name}"></span>
+                                                <span class="pcode" style="display: none"
+                                                      th:text="${item.pcode}"></span>
+                                                        <span class="ptime" style="display: none"
+                                                              th:text="${#dates.format(item.time,'yyyy-MM-dd')}"></span>
+                                            </span>
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)">2天前打下轨后连涨2天</a>
+                                    <b class="arrow"></b>
+                                    <ul class="nav nav-subnav" th:each="item: ${data4}">
+                                        <li class="nav-item nav-item-has-subnav">
+                                            <a>
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                <span class="code"><span class="c" th:text="${item.code}"></span> &amp;
+                                                <span class="n" th:text="${item.name}"></span>
+                                                <span class="pcode" style="display: none"
+                                                      th:text="${item.pcode}"></span>
+                                                   <span class="ptime" style="display: none"
+                                                         th:text="${#dates.format(item.time,'yyyy-MM-dd')}"></span>
+                                            </span>
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)">3天前打下轨后连涨3天</a>
+                                    <b class="arrow"></b>
+                                    <ul class="nav nav-subnav" th:each="item: ${data5}">
+                                        <li class="nav-item nav-item-has-subnav">
+                                            <a>
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                <span class="code"><span class="c" th:text="${item.code}"></span> &amp;
+                                                <span class="n" th:text="${item.name}"></span>
+                                                <span class="pcode" style="display: none"
+                                                      th:text="${item.pcode}"></span>
+                                                   <span class="ptime" style="display: none"
+                                                         th:text="${#dates.format(item.time,'yyyy-MM-dd')}"></span>
+                                                </span>
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="javascript:void(0)"><i class="mdi mdi-menu"></i> 沪A - <span
+                                    th:text="${#dates.format(time,'yyyy-MM-dd')}"></span></a>
+                            <ul class="nav nav-subnav">
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)">流值大于100亿</a>
+                                    <b class="arrow"></b>
+                                    <ul class="nav nav-subnav" th:each="item: ${data2}">
+                                        <li class="nav-item nav-item-has-subnav">
+                                            <a>
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                <span class="code"><span class="c" th:text="${item.code}"></span> &amp;
+                                                <span class="n" th:text="${item.name}"></span>
+                                                <span class="pcode" style="display: none"
+                                                      th:text="${item.pcode}"></span>
+                                            </span>
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="javascript:void(0)">流值小于100亿</a>
+                                    <ul class="nav nav-subnav" th:each="item: ${data1}">
+                                        <li class="nav-item nav-item-has-subnav">
+                                            <a>
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                <span class="code"><span class="c" th:text="${item.code}"></span> &amp;
+                                                    <span class="n" th:text="${item.name}"></span>
+                                                      <span class="pcode" style="display: none"
+                                                            th:text="${item.pcode}"></span>
+                                                </span>
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <p class="copyright">Copyright &copy; 2021.7</p>
+                </div>
+            </div>
+
+        </aside>
+        <!--End 左侧导航-->
+
+        <!--头部信息-->
+        <header class="lyear-layout-header">
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+                    <div class="topbar-left">
+                        <div class="lyear-aside-toggler">
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                        </div>
+                        <span class="navbar-page-title">沪A - <span th:text="${#dates.format(time,'yyyy-MM-dd')}"></span></span>
+                    </div>
+
+                    <ul class="topbar-right">
+                        <li class="dropdown dropdown-profile">
+                            <a href="javascript:void(0)" data-toggle="dropdown">
+                                <img class="img-avatar img-avatar-48 m-r-10" src="static/index/images/users/avatar.jpg"
+                                     alt="ENE分析"/>
+                                <span>ENE分析 <span class="caret"></span></span>
+                            </a>
+                        </li>
+                        <!--切换主题配色-->
+                    </ul>
+                </div>
+            </nav>
+
+        </header>
+        <!--End 头部信息-->
+
+        <!--页面主要内容-->
+        <main class="container">
+            <!--占空位-->
+            <div class="row" style="margin-top: 8%">
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="page-header">
+                            <div class="row">
+                                <h2 class="col-md-offset-1">
+                                    <span class="title">000001 &amp; 上证指数</span>
+                                    <small>
+                                        <i class="ptitle ace-icon fa fa-angle-double-right"></i>
+                                    </small>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div id="main" style="height:400px;"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div id="detail" class="table-responsive" style="margin-left: 5%;">
+                                    <table class="table">
+                                        <tr>
+                                            <td><a id="dongfangcaifu" href="http://quote.eastmoney.com/zs000001.html"
+                                                   target="_blank"
+                                                   class="btn btn-dark" type="button" title="使用东方财富查看详情">东方财富</a>
+                                            </td>
+                                            <td><a id="wangyicaijing" href="http://quotes.money.163.com/0000001.html"
+                                                   target="_blank"
+                                                   class="btn btn-primary" type="button" title="使用网易财经查看详情">网易财经</a>
+                                            </td>
+                                            <td><a id="tonghuashun" href="http://q.10jqka.com.cn/" target="_blank"
+                                                   class="btn btn-success" type="button" title="使用同花顺查看详情">同花顺</a>
+                                            </td>
+                                            <td><a id="souhucaijin"
+                                                   href="https://q.stock.sohu.com/zs/000001/index.shtml"
+                                                   target="_blank"
+                                                   class="btn btn-warning" type="button" title="使用搜狐查看详情">搜狐财经</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>名称：<span class="name"></span></td>
+                                            <td>收盘价：<span class="closingPrice"></span></td>
+                                            <td>最高价：<span class="topPrice"></span></td>
+                                            <td>最低价：<span class="lowPrice"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>开盘价：<span class="startPrice"></span></td>
+                                            <td>涨跌额：<span class="changeAmount"></span></td>
+                                            <td>涨跌幅：<span class="changePercent"></span></td>
+                                            <td>换手率：<span class="turnoverRate"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>成交量：<span class="vol"></span></td>
+                                            <td>成交金额：<span class="vot"></span></td>
+                                            <td>总市值：<span class="mktCap"></span></td>
+                                            <td>流通市值：<span class="cmktCap"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="hr hr32 hr-dotted"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <footer class="footer bg-white shadow ">
+            <div class="panel panel-default">
+                <div class="panel-body" style="text-align: center">
+                    <div class="footer-content">
+                        <span class="bigger-120">
+                            Application &copy; 2021-07
+                        </span>
+                        <span class="action-buttons">
+                            <a href="#">
+                                <i class="light-blue bigger-100">QQ:1114217951</i>
+                            </a>
+                            <a href="#">
+                                <i class="light-blue bigger-100">微信:ncc18154183997</i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script>
+    //初始化操作
+    window.onload = function () {
+        //初始化上证指数
+        var url = "https://img1.money.126.net/data/hs/kline/day/history/2021/0000001.json";
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'jsonp', // 请求方式为jsonp
+            jsonpCallback: "onBack", // 自定义回调函数名
+            data: {}
+        });
+
+    }
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+    var colorList = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#F63B09', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];
+    var labelFont = 'bold 12px Sans-serif';
+
+    function calculateMA(dayCount, data0) {
+        var result = [];
+        for (var i = 0, len = data0.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0[i - j][1];
+            }
+            result.push((sum / dayCount).toFixed(2));
+        }
+        return result;
+    }
+
+    function vol(data) {
+        var result = [];
+        for (var i = 0, len = data.length; i < len; i++) {
+            result.push(data[i][5])
+        }
+        return result;
+    }
+
+    function datefun(data) {
+        var result = [];
+        for (var i = 0, len = data.length; i < len; i++) {
+            result.push(data[i][0])
+        }
+        return result;
+    }
+
+    function getdata(data) {
+        var result = [];
+        for (var i = 0, len = data.length; i < len; i++) {
+            result.push([data[i][1], data[i][2], data[i][4], data[i][3]])
+        }
+        return result;
+    }
+
+    //计算ene上下轨
+    function ene(data0, dayCount, param) {
+        var result = [];
+        for (var i = 0, len = data0.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0[i - j][1];
+            }
+            result.push((sum / dayCount) * param);
+        }
+        return result;
+    }
+
+    //计算ene中轨
+    function enem(data0, dayCount, p1, p2) {
+        var result = [];
+        for (var i = 0, len = data0.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0[i - j][1];
+            }
+            result.push(((sum / dayCount) * p1 + (sum / dayCount) * p2) / 2);
+        }
+        return result;
+    }
+
+    // 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+    $(".code").click(function () {
+        var code = $(this).find(".c").text();
+        var pcode = $(this).find(".pcode").text();
+        var ptime = $(this).find(".ptime").text();
+        //东方财富
+        var dongfancaifuUrl = 'http://quote.eastmoney.com/sh' + code + '.html'
+        var wangyicaijing = 'http://quotes.money.163.com/' + pcode + '.html'
+        var tonghuashun = 'http://stockpage.10jqka.com.cn/' + code + '/';
+        var souhucaijin = 'https://q.stock.sohu.com/cn/' + code + '/index.shtml';
+        $("#dongfangcaifu").attr("href", dongfancaifuUrl);
+        $("#wangyicaijing").attr("href", wangyicaijing);
+        $("#tonghuashun").attr("href", tonghuashun);
+        $("#souhucaijin").attr("href", souhucaijin);
+
+        var name = $(this).find(".n").text();
+        $.get("/getDetail?code=" + code, {}, function (data) {
+            $(".name").text(name);
+            $(".closingPrice").text(data.closingPrice);
+            $(".topPrice").text(data.topPrice);
+            $(".lowPrice").text(data.lowPrice);
+            $(".startPrice").text(data.startPrice);
+            $(".changeAmount").text(data.changeAmount);
+            $(".changePercent").text(data.changePercent);
+            $(".turnoverRate").text(data.turnoverRate);
+            $(".vol").text(data.vol);
+            $(".vot").text(data.vot);
+            $(".mktCap").text(data.mktCap);
+            $(".cmktCap").text(data.cmktCap);
+        })
+        $(".title").text(code + "&" + name)
+        if(ptime!=null && ptime!=''){
+            $(".ptitle").text("("+ptime+"达到下轨)")
+        }
+        //设置选中
+        $(".code").parent().css("background", "#fff")
+        $(this).parent().css("background", "#eee")
+        var url = "https://img1.money.126.net/data/hs/kline/day/history/2021/" + pcode + ".json";
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'jsonp', // 请求方式为jsonp
+            jsonpCallback: "onBack", // 自定义回调函数名
+            data: {}
+        });
+
+    })
+
+    function onBack(data0) {
+        var data1 = data0.data;
+        var dataMA5 = calculateMA(5, data1);
+        var dataMA10 = calculateMA(10, data1);
+        var dataMA20 = calculateMA(20, data1);
+        var volumes = vol(data1);
+        var dates = datefun(data1)
+        data = getdata(data1)
+        var titleName = data0.name;
+        option = {
+            animation: false,
+            color: colorList,
+            title: {
+                left: 'center',
+                text: titleName
+            },
+            legend: {
+                top: 30,
+                data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30', 'UPPER', 'LOWER', 'ENE'],
+                selected: {
+                    'MA5': false,
+                    'MA10': false,
+                    'MA20': false,
+                    'UPPER': true,
+                    'ENE': true,
+                    'LOW': true,
+                }
+            },
+            tooltip: {},
+            axisPointer: {
+                link: [{
+                    xAxisIndex: [0, 1]
+                }]
+            },
+            dataZoom: [{
+                type: 'slider',
+                xAxisIndex: [0, 1],
+                realtime: false,
+                start: 50,
+                end: 100,
+                top: 65,
+                height: 20,
+                handleIcon: 'path://M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                handleSize: '120%'
+            }, {
+                type: 'inside',
+                xAxisIndex: [0, 1],
+                start: 40,
+                end: 70,
+                top: 30,
+                height: 20
+            }],
+            xAxis: [{
+                type: 'category',
+                data: dates,
+                boundaryGap: false,
+                axisLine: {lineStyle: {color: '#777'}},
+                axisLabel: {
+                    formatter: function (value) {
+                        return value;
+                        // return echarts.format.formatTime('MMdd', value);
+                    }
+                },
+                min: 'dataMin',
+                max: 'dataMax',
+                axisPointer: {
+                    show: true
+                }
+            }, {
+                type: 'category',
+                gridIndex: 1,
+                data: dates,
+                scale: true,
+                boundaryGap: false,
+                splitLine: {show: false},
+                axisLabel: {show: false},
+                axisTick: {show: false},
+                axisLine: {lineStyle: {color: '#777'}},
+                splitNumber: 20,
+                min: 'dataMin',
+                max: 'dataMax',
+                axisPointer: {
+                    type: 'shadow',
+                    label: {show: false},
+                    triggerTooltip: true,
+                    handle: {
+                        show: true,
+                        margin: 30,
+                        color: '#B80C00'
+                    }
+                }
+            }],
+            yAxis: [{
+                scale: true,
+                splitNumber: 2,
+                axisLine: {lineStyle: {color: '#777'}},
+                splitLine: {show: true},
+                axisTick: {show: false},
+                axisLabel: {
+                    inside: true,
+                    formatter: '{value}\n'
+                }
+            }, {
+                scale: true,
+                gridIndex: 1,
+                splitNumber: 2,
+                axisLabel: {show: false},
+                axisLine: {show: false},
+                axisTick: {show: false},
+                splitLine: {show: false}
+            }],
+            grid: [{
+                left: 20,
+                right: 20,
+                top: 110,
+                height: 120
+            }, {
+                left: 20,
+                right: 20,
+                height: 40,
+                top: 260
+            }],
+
+            series: [{
+                name: 'Volume',
+                type: 'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                itemStyle: {
+                    color: '#7fbe9e'
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: '#140'
+                    }
+                },
+                data: volumes
+            }, {
+                type: 'candlestick',
+                name: '日K',
+                data: data,
+                itemStyle: {
+                    color: '#ef232a',
+                    color0: '#14b143',
+                    borderColor: '#ef232a',
+                    borderColor0: '#14b143'
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: 'black',
+                        color0: '#444',
+                        borderColor: 'black',
+                        borderColor0: '#444'
+                    }
+                }
+            }, {
+                name: 'MA5',
+                type: 'line',
+                data: dataMA5,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    width: 1
+                }
+            }, {
+                name: 'MA10',
+                type: 'line',
+                data: dataMA10,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    width: 1
+                }
+            }, {
+                name: 'MA20',
+                type: 'line',
+                data: dataMA20,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    width: 1
+                },
+            },
+                {
+                    name: 'UPPER',
+                    type: 'line',
+                    data: ene(data1, 10, 1.11),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        width: 1
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#F7F40A',
+                                width: 1//设置线条粗细
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'LOWER',
+                    type: 'line',
+                    data: ene(data1, 10, 0.91),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        width: 1
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#F63B09',
+                                width: 1//设置线条粗细
+                            }
+                        }
+                    },
+                },
+                {
+                    name: 'ENE',
+                    type: 'line',
+                    data: enem(data1, 10, 1.11, 0.91),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        width: 1
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#020202',
+                                width: 1//设置线条粗细
+                            }
+                        }
+                    },
+                }
+            ]
+        };
+        option && myChart.setOption(option);
+    }
+
+    option && myChart.setOption(option);
+</script>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script type="text/javascript" src="static/index/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="static/index/js/main.min.js"></script>
+
+<!--图表插件-->
+<script type="text/javascript" src="https://s3.pstatp.com/cdn/expire-1-M/Chart.js/2.7.0/Chart.min.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

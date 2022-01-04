@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vbqncc.tstock.tstock.mapper.WyStockRecordMapper">
+    <!--    计算10日均线,ene enereach使用-->
+    <select id="selectTenAve" resultType="com.vbqncc.tstock.tstock.entity.WyStockRecord">
+        select code ,time ,low_price from wy_stock_record
+        where
+        time = #{time}
+        and change_amount is not null
+        and ten_ave is  null
+    </select>
+    <select id="selectTenRecord" resultType="com.vbqncc.tstock.tstock.entity.WyStockRecord">
+        select closing_price,code ,time
+        from wy_stock_record
+        where time &lt;= #{time}
+        and code=#{code}
+        and change_amount is not null
+        order by time desc
+        limit 0,10
+    </select>
+    <update id="updateAve">
+        update wy_stock_record
+        set
+        ten_ave=#{tenAve},
+        ene_upper=#{eneUpper},
+        ene_mid=#{eneMid},
+        ene_lower=#{eneLower},
+        ene_reach=#{eneReach}
+        where time=#{time}
+        and code=#{code}
+
+    </update>
+
+    <!--        行情市场，批量插入-->
+    <insert id="insertWyStockRecord" parameterType="com.vbqncc.tstock.tstock.entity.WyStockRecord">
+        INSERT INTO wy_stock_record
+        (time, code,
+        closing_price, top_price,
+        low_price, start_price,
+        change_amount, change_percent,
+        turnover_rate, vot,vol,
+        mkt_cap, cmkt_cap)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.time},#{item.code},
+            #{item.closingPrice},#{item.topPrice},
+            #{item.lowPrice},#{item.startPrice},
+            #{item.changeAmount},#{item.changePercent},
+            #{item.turnoverRate},#{item.vot},#{item.vol},
+            #{item.mktCap},#{item.cmktCap}
+            )
+        </foreach>
+    </insert>
+
+
+    <!--展示使用-->
+    <!--    查询所有ene打下轨代码-->
+    <!--    小于一百亿-->
+    <select id="getGoodStock1" resultType="com.vbqncc.tstock.tstock.entity.GoodStock">
+       SELECT
+            t1.code,
+            t2.code as pcode,
+            t2.name,
+            t1.time
+        FROM
+            wy_stock_record t1
+            LEFT JOIN wy_stock t2 ON t1.CODE = t2.symbol
+        WHERE
+            t1.ene_reach = 1
+            and t2.market=#{market}
+            AND t1.time = #{time}
+--             and cmkt_cap &lt; 10000000000
+    </select>
+    <!--    大于100亿-->
+    <select id="getGoodStock2" resultType="com.vbqncc.tstock.tstock.entity.GoodStock">
+       SELECT
+            t1.code,
+            t2.code as pcode,
+            t2.name,
+            t1.time
+        FROM
+            wy_stock_record t1
+            LEFT JOIN wy_stock t2 ON t1.CODE = t2.symbol
+        WHERE
+            t1.ene_reach = 1
+            and t2.market=#{market}
+            AND t1.time = #{time}
+--             and cmkt_cap &gt;= 10000000000
+    </select>
+
+    <select id="getDetail" resultType="com.vbqncc.tstock.tstock.entity.WyStockRecord">
+        select *
+        from wy_stock_record
+        where code=#{code}
+        and time=#{time}
+    </select>
+
+
+    <!--    根据指定代码查询要展示的数据-->
+    <select id="queryByCode" resultType="com.vbqncc.tstock.tstock.entity.EveryGoodStock">
+       select
+       time,
+       closing_price,
+       top_price,
+       low_price,
+       start_price,
+       vol,
+       ene_upper,
+       ene_mid,
+       ene_lower
+       from wy_stock_record
+       where code=#{code}
+   </select>
+
+    <!--    获取打下轨后连涨1一天股票-->
+    <select id="getStock" resultType="com.vbqncc.tstock.tstock.entity.GoodStock">
+       SELECT
+        t3.symbol as code,
+        t3.code as pcode,
+        t3.`name`,
+        t2.time,  -- n天前打下轨代码
+        t1.closing_price,
+        t2.closing_price
+    FROM
+        wy_stock_record t1
+        LEFT JOIN wy_stock_record t2 ON t1.CODE = t2.CODE
+        left join wy_stock t3 on t1.code=t3.symbol
+    WHERE
+        t1.time = #{dateEnd}
+        AND t2.time = #{dateStart}
+        AND t2.ene_reach = 1
+    HAVING
+        t1.closing_price > t2.closing_price
+    </select>
+</mapper>

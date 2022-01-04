@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>首页 - ENE股票分析</title>
+    <link rel="icon" href="static/index/favicon.ico" type="image/ico">
+    <meta name="keywords" content="ENE股票打下轨股票代码收集分析">
+    <meta name="description" content="ENE股票打下轨股票代码收集分析">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link href="static/index/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="static/index/css/style.min.css" rel="stylesheet">
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+                <a href="/"><img src="static/index/images/ene.jpeg" title="LightYear" alt="LightYear"/>
+                </a>
+            </div>
+            <div class="lyear-layout-sidebar-scroll">
+
+                <nav class="sidebar-main">
+                    <ul class="nav nav-drawer">
+                        <li class="nav-item active"><a href="huia.html"><i class="mdi mdi-home"></i> 搜索</a></li>
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 市场分类</a>
+                            <ul class="nav nav-subnav">
+                                <li><a href="/hua" target="_blank">沪深A股</a></li>
+                                <!--                                <li><a href="#">沪深B股</a></li>-->
+                                <!--                                <li><a href="#">沪市A股</a></li>-->
+                                <!--                                <li><a href="#">沪市B股</a></li>-->
+                                <!--                                <li><a href="#">科创板</a></li>-->
+                                <!--                                <li><a href="#">深市A股</a></li>-->
+                                <!--                                <li><a href="#">深市B股</a></li>-->
+                                <!--                                <li><a href="#">创业板</a></li>-->
+                                <!--                                <li><a href="#">A+B股</a></li>-->
+                                <!--                                <li><a href="#">A+H股</a></li>-->
+                                <!--                                <li><a href="#">沪股通</a></li>-->
+                                <!--                                <li><a href="#">高价股</a></li>-->
+                                <!--                                <li><a href="#">中价股</a></li>-->
+                                <!--                                <li><a href="#">低价股</a></li>-->
+                                <!--                                <li><a href="#">大盘股</a></li>-->
+                                <!--                                <li><a href="#">中盘股</a></li>-->
+                                <!--                                <li><a href="#">小盘股</a></li>-->
+                                <!--                                <li><a href="#">次新股</a></li>-->
+                                <!--                                <li><a href="#">风险警示</a></li>-->
+                                <!--                                <li><a href="#">退市整理</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <p class="copyright">Copyright &copy; 2021.7</p>
+                </div>
+            </div>
+
+        </aside>
+        <!--End 左侧导航-->
+
+        <!--头部信息-->
+        <header class="lyear-layout-header">
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+
+                    <div class="topbar-left">
+                        <div class="lyear-aside-toggler">
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                        </div>
+                        <span class="navbar-page-title"> 搜索 </span>
+                    </div>
+
+                    <ul class="topbar-right">
+                        <li class="dropdown dropdown-profile">
+                            <a href="javascript:void(0)" data-toggle="dropdown">
+                                <img class="img-avatar img-avatar-48 m-r-10" src="static/index/images/users/avatar.jpg"
+                                     alt="ENE分析"/>
+                                <span>ENE分析 <span class="caret"></span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!--End 头部信息-->
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1" style="margin-top: 2%">
+                    <div class="input-group">
+                        <input type="text" style="border-radius:9px;" class="form-control" name="code" id="code"
+                               placeholder="请输入股票名称或代码">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" id="btn">搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <h2 style="margin-left: 1%;margin-top: 1%">
+                                    <span class="title"><span class="tcode">代码</span> &amp; <sapn
+                                            class="tname">名称</sapn></span>
+                                </h2>
+                                <div style="margin-left: 5%">
+                                    <div id="main" style="width:90%; height:500px;"></div>
+                                </div>
+                            </div>
+                            <!-- 首页描述，每日更新时间，-->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!--End 页面主要内容-->
+    </div>
+</div>
+<script>
+    //初始化操作
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+    var upColor = '#ec0000';
+    var upBorderColor = '#8A0000';
+    var downColor = '#00da3c';
+    var downBorderColor = '#008F28';
+    var colorList = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a',
+        '#6e7074', '#546570', '#c4ccd3'
+    ];
+    var labelFont = 'bold 12px Sans-serif';
+    var data0;
+    $("#btn").click(function () {
+        var code = $("#code").val()
+        $.get("/search?code=" + code, {}, function (data) {
+            var pcode = data.code;
+            $(".tcode").text(data.symbol)
+            $(".tname").text(data.name)
+            var url = "https://img1.money.126.net/data/hs/kline/day/history/2021/" + pcode + ".json";
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'jsonp', // 请求方式为jsonp
+                jsonpCallback: "onBack", // 自定义回调函数名
+                data: {}
+            });
+        })
+    })
+
+    function onBack(data) {
+        data0 = splitData(data.data);
+        myChart.setOption(option = {
+            animation: false,
+            color: colorList,
+            title: {
+                text: name,
+                left: 0
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            legend: {
+                data: ['日K', 'MA5', 'MA10', 'MA20', 'UPPER', 'ENE', 'LOW'],
+                selected: {
+                    'MA5': false,
+                    'MA10': false,
+                    'MA20': false,
+                    'UPPER': true,
+                    'ENE': true,
+                    'LOW': true,
+                }
+            },
+            grid: {
+                left: '10%',
+                right: '10%',
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: data0.categoryData,
+                scale: true,
+                boundaryGap: false,
+                axisLine: {
+                    onZero: false
+                },
+                splitLine: {
+                    show: false
+                },
+                splitNumber: 20,
+                min: 'dataMin',
+                max: 'dataMax'
+
+            },
+            yAxis: {
+                scale: true,
+                splitArea: {
+                    show: true
+                }
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 50,
+                end: 100
+            },
+                {
+                    show: true,
+                    type: 'slider',
+                    top: '90%',
+                    start: 50,
+                    end: 100
+                }
+
+            ],
+            series: [{
+                name: '日K',
+                type: 'candlestick',
+                data: data0.values,
+                itemStyle: {
+                    color: upColor,
+                    color0: downColor,
+                    borderColor: upBorderColor,
+                    borderColor0: downBorderColor
+                },
+                markPoint: {
+                    label: {
+                        normal: {
+                            formatter: function (param) {
+                                return param != null ? Math.round(param.value) : '';
+                            }
+                        }
+                    },
+                    data: [{
+                        name: 'XX标点',
+                        coord: ['2013/5/31', 2300],
+                        value: 2300,
+                        itemStyle: {
+                            color: 'rgb(41,60,85)'
+                        }
+                    },
+                        {
+                            name: 'highest value',
+                            type: 'max',
+                            valueDim: 'highest'
+                        },
+                        {
+                            name: 'lowest value',
+                            type: 'min',
+                            valueDim: 'lowest'
+                        },
+                        {
+                            name: 'average value on close',
+                            type: 'average',
+                            valueDim: 'close'
+                        }
+                    ],
+                    tooltip: {
+                        formatter: function (param) {
+                            return param.name + '<br>' + (param.data.coord || '');
+                        }
+                    }
+                },
+                markLine: {
+                    symbol: ['none', 'none'],
+                    data: [
+                        [{
+                            name: 'from lowest to highest',
+                            type: 'min',
+                            valueDim: 'lowest',
+                            symbol: 'circle',
+                            symbolSize: 10,
+                            label: {
+                                show: false
+                            },
+                            emphasis: {
+                                label: {
+                                    show: false
+                                }
+                            }
+                        },
+                            {
+                                type: 'max',
+                                valueDim: 'highest',
+                                symbol: 'circle',
+                                symbolSize: 10,
+                                label: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    label: {
+                                        show: false
+                                    }
+                                }
+                            }
+                        ],
+                        {
+                            name: 'min line on close',
+                            type: 'min',
+                            valueDim: 'close'
+                        },
+                        {
+                            name: 'max line on close',
+                            type: 'max',
+                            valueDim: 'close'
+                        }
+                    ]
+                }
+            },
+                {
+                    name: 'MA5',
+                    type: 'line',
+                    data: calculateMA(5),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    }
+                },
+                {
+                    name: 'MA10',
+                    type: 'line',
+                    data: calculateMA(10),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    }
+                },
+                {
+                    name: 'MA20',
+                    type: 'line',
+                    data: calculateMA(20),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    }
+                },
+                {
+                    name: 'UPPER',
+                    type: 'line',
+                    data: ene(10, 1.11),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'yellow'
+                            }
+                        }
+                    },
+                },
+                {
+                    name: 'ENE',
+                    type: 'line',
+                    data: enem(10, 1.11, 0.91),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    }
+                },
+                {
+                    name: 'LOW',
+                    type: 'line',
+                    data: ene(10, 0.91),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#00FF00'
+                            }
+                        }
+                    },
+                },
+
+            ]
+        })
+    }
+
+    function splitData(rawData) {
+        var categoryData = [];
+        var values = []
+        for (var i = 0; i < rawData.length; i++) {
+            categoryData.push(rawData[i].splice(0, 1)[0]);
+            values.push(rawData[i])
+        }
+        return {
+            categoryData: categoryData,
+            values: values
+        };
+    }
+
+    function calculateMA(dayCount) {
+        var result = [];
+        for (var i = 0, len = data0.values.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0.values[i - j][1];
+            }
+            result.push(sum / dayCount);
+        }
+        return result;
+    }
+
+    //计算ene上下轨
+    function ene(dayCount, param) {
+        var result = [];
+        for (var i = 0, len = data0.values.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0.values[i - j][1];
+            }
+            result.push((sum / dayCount) * param);
+        }
+        return result;
+    }
+
+    //计算ene中轨
+    function enem(dayCount, p1, p2) {
+        var result = [];
+        for (var i = 0, len = data0.values.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += data0.values[i - j][1];
+            }
+            result.push(((sum / dayCount) * p1 + (sum / dayCount) * p2) / 2);
+        }
+        return result;
+    }
+
+    option && myChart.setOption(option);
+</script>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script type="text/javascript" src="static/index/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="static/index/js/main.min.js"></script>
+
+<!--图表插件-->
+<script type="text/javascript" src="https://s3.pstatp.com/cdn/expire-1-M/Chart.js/2.7.0/Chart.min.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>
